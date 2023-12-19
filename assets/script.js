@@ -4,6 +4,7 @@ const searchBtn = document.getElementById('search');
 const cityInput = document.getElementById('city');
 const weatherDataDiv = document.getElementById('weather-data');
 const forecastDiv = document.getElementById('forecast');
+const cityList = document.getElementById('city-list'); // Reference to the city list
 
 searchBtn.addEventListener('click', getWeather);
 
@@ -20,6 +21,8 @@ function getWeather() {
                     forecastDiv.innerHTML = ''; // Clear forecast data if city not found
                 } else {
                     displayCurrentWeather(data); // Display current weather data
+                    updateCityList(city); // Add the searched city to the list
+                   
                     // Fetch 5-day forecast data
                     fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=imperial`)
                         .then(response => response.json())
@@ -70,3 +73,25 @@ function displayForecast(forecastData) {
     });
 }
 
+const MAX_SEARCH_HISTORY = 5; // Maximum number of search history items to display
+
+// Update the updateCityList function to limit the number of displayed items
+function updateCityList(city) {
+    const cityButtons = document.querySelectorAll('.city-button');
+    
+    // If there are already 5 search history items, remove the oldest one before adding the new one
+    if (cityButtons.length >= MAX_SEARCH_HISTORY) {
+        cityList.removeChild(cityList.firstElementChild); // Remove the oldest city button
+    }
+
+    const button = document.createElement('button');
+    button.textContent = city;
+    button.classList.add('city-button'); // Add a class for styling or event handling
+    cityList.appendChild(button);
+
+    // Add a click event listener to each city button
+    button.addEventListener('click', function() {
+        cityInput.value = city; // Set the input field value to the clicked city
+        getWeather(); // Trigger weather search for the clicked city
+    });
+}

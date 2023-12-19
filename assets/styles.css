@@ -27,10 +27,22 @@ body {
     padding: 20px;
     border-radius: 5px;
   }
-  
+
   #forecast {
     background-color: #f9f9f9;
     padding: 20px;
+    border-radius: 5px;
+    display: flex; /* Use flexbox for the forecast container */
+    flex-wrap: nowrap; /* Prevent wrapping to new lines */
+    justify-content: space-around; /* Distribute items along the main axis */
+  }
+  
+  #forecast > div {
+    flex: 0 0 18%; /* Adjust the width of each forecast item */
+    text-align: center;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
   }
   
