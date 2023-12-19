@@ -5,6 +5,8 @@ const cityInput = document.getElementById('city');
 const weatherDataDiv = document.getElementById('weather-data');
 const forecastDiv = document.getElementById('forecast');
 
+searchBtn.addEventListener('click', getWeather);
+
 function getWeather() {
     const city = cityInput.value.trim();
 
