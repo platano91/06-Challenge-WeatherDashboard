@@ -40,3 +40,13 @@ function getWeather() {
         forecastDiv.innerHTML = ''; // Clear forecast data if no city entered
     }
 }
+
+function displayCurrentWeather(data) {
+    // Display current weather data
+    weatherDataDiv.innerHTML = `
+        <h2>${data.name} Weather</h2>
+        <p>Temp: ${data.main.temp}°F</p>
+        <p>Wind: ${data.wind.speed} MPH</p>
+        <p>Humidity: ${data.main.humidity}%</p>
+    `;
+}
