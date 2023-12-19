@@ -50,3 +50,21 @@ function displayCurrentWeather(data) {
         <p>Humidity: ${data.main.humidity}%</p>
     `;
 }
+
+function displayForecast(forecastData) {
+    // Display 5-day forecast data
+    const forecasts = forecastData.list.filter(item => item.dt_txt.includes('12:00:00')); // Extracts daily forecasts (at noon)
+    forecastDiv.innerHTML = '<h3>5-Day Forecast</h3>';
+    forecasts.forEach(forecast => {
+        const date = new Date(forecast.dt * 1000); // Convert UNIX timestamp to date
+        const day = date.toLocaleDateString('en-US', { weekday: 'short' });
+        const temp = forecast.main.temp;
+        forecastDiv.innerHTML += `
+            <div>
+                <p>${day}</p>
+                <p>Temp: ${temp}°F</p>
+            </div>
+        `;
+    });
+}
+
